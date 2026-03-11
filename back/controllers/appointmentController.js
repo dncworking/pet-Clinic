@@ -2,6 +2,7 @@ import {
   getAllAppointmentsM,
   getAllAppointmentByIDM,
   postAppointmentM,
+  deleteAppointmentM,
 } from "../models/appointmentModel.js";
 import AppError from "../utils/appError.js";
 
@@ -41,6 +42,23 @@ export const postAppointment = async (req, res, next) => {
     res.status(201).json({
       status: "success",
       data: newAppointment,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteAppointment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const delAppointment = deleteAppointmentM(id);
+    if (!delAppointment) {
+      throw new AppError("Invalid appointment ID", 404);
+    }
+    res.status(200).json({
+      status: "success",
+      message: "Appointment was deleted",
+      data: null,
     });
   } catch (error) {
     next(error);

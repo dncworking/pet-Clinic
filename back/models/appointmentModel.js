@@ -34,3 +34,11 @@ export const postAppointmentM = async (appointment) => {
     RETURNING *`;
   return data[0];
 };
+
+export const deleteAppointmentM = async (id) => {
+  const data = await sql`
+    DELETE FROM pets_appointments
+    WHERE id = ${id}
+    RETURNING *`;
+  return data[0];
+};
