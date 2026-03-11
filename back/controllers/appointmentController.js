@@ -1,6 +1,7 @@
 import {
   getAllAppointmentsM,
   getAllAppointmentByIDM,
+  postAppointmentM,
 } from "../models/appointmentModel.js";
 import AppError from "../utils/appError.js";
 
@@ -27,6 +28,19 @@ export const getAllAppointmentByID = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data: appointment,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const postAppointment = async (req, res, next) => {
+  try {
+    const appointment = req.body;
+    const newAppointment = await postAppointmentM(appointment);
+    res.status(201).json({
+      status: "success",
+      data: newAppointment,
     });
   } catch (error) {
     next(error);

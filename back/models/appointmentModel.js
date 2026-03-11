@@ -12,3 +12,25 @@ export const getAllAppointmentByIDM = async (id) => {
     WHERE id = ${id}`;
   return data[0];
 };
+
+export const postAppointmentM = async (appointment) => {
+  const {
+    pet_name,
+    owner_name,
+    description,
+    appointment_date,
+    appointment_time,
+  } = appointment;
+
+  const data = await sql`
+  INSERT INTO pets_appointments
+  (  pet_name,
+    owner_name,
+    description,
+    appointment_date,
+    appointment_time)
+    VALUES
+    (${pet_name},${owner_name},${description},${appointment_date},${appointment_time})
+    RETURNING *`;
+  return data[0];
+};
