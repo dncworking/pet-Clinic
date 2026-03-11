@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS petsAppointment (
+CREATE TABLE IF NOT EXISTS pets_appointments (
     id SERIAL PRIMARY KEY,
     pet_name VARCHAR(100) NOT NULL,    
     owner_name VARCHAR(100) NOT NULL, 
