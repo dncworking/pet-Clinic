@@ -47,9 +47,9 @@ function SignUpForm() {
             {errors.email && <p>{errors.email.message}</p>}
           </div>
           <div>
-            <label>What are you?</label>
+            <label htmlFor="role">What are you?</label>
             <select
-              name="role"
+              id="role"
               id="role"
               {...register("role", { required: true })}
             >
