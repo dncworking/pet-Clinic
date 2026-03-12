@@ -16,23 +16,23 @@ function SignUpForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Sign Up</h2>
         <section>
-          <article>
+          <div>
             <input
               type="text"
               placeholder="First Name"
               {...register("firstName", { required: "First name is required" })}
             />
             {errors.firstName && <p>{errors.firstName.message}</p>}
-          </article>
-          <article>
+          </div>
+          <div>
             <input
               type="text"
               placeholder="Last Name"
               {...register("lastName", { required: "Last name is required" })}
             />
             {errors.lastName && <p>{errors.lastName.message}</p>}
-          </article>
-          <article>
+          </div>
+          <div>
             <input
               type="email"
               placeholder="Email"
@@ -45,8 +45,8 @@ function SignUpForm() {
               })}
             />
             {errors.email && <p>{errors.email.message}</p>}
-          </article>
-          <article>
+          </div>
+          <div>
             <label>What are you?</label>
             <select
               name="role"
@@ -56,8 +56,8 @@ function SignUpForm() {
               <option value="patient">Patient</option>
               <option value="admin">Admin</option>
             </select>
-          </article>
-          <article>
+          </div>
+          <div>
             <input
               type="password"
               placeholder="Paswword"
@@ -70,7 +70,7 @@ function SignUpForm() {
               })}
             />
             {errors.password && <p>{errors.password.message}</p>}
-          </article>
+          </div>
         </section>
         <button type="submit">Register</button>
       </form>
