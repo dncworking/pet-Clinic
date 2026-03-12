@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 function SignUpForm() {
   const navigate = useNavigate();
   const {
@@ -49,7 +49,6 @@ function SignUpForm() {
           <div>
             <label htmlFor="role">What are you?</label>
             <select
-              id="role"
               id="role"
               {...register("role", { required: true })}
             >

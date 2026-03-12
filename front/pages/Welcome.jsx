@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function Welcome() {
   const navigate = useNavigate();
