@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import SignUpForm from "../pages/SignUpForm.jsx";
-import LoginForm from "../pages/LoginForm.jsx";
-import Welcome from "../pages/Welcome.jsx";
+import SignUpForm from "./pages/SignUpForm.jsx";
+import LoginForm from "./pages/LoginForm.jsx";
+import Welcome from "./pages/Welcome.jsx";
 
 function App() {
   return (
