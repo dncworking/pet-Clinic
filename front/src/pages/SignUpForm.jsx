@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import styles from "../styles/Forms.module.css";
 function SignUpForm() {
   const navigate = useNavigate();
   const {
@@ -13,27 +14,37 @@ function SignUpForm() {
   };
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Sign Up</h2>
-        <section>
-          <div>
+      <main className={styles.pageWrapper}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <h2 className={styles.header}>Sign Up</h2>
+
+          <div className={styles.inputGroup}>
             <input
+              className={styles.input}
               type="text"
               placeholder="First Name"
-              {...register("firstName", { required: "First name is required" })}
+              {...register("firstName", {
+                required: "First name is required",
+              })}
             />
-            {errors.firstName && <p>{errors.firstName.message}</p>}
+            {errors.firstName && (
+              <p className={styles.errorText}>{errors.firstName.message}</p>
+            )}
           </div>
-          <div>
+          <div className={styles.inputGroup}>
             <input
+              className={styles.input}
               type="text"
               placeholder="Last Name"
               {...register("lastName", { required: "Last name is required" })}
             />
-            {errors.lastName && <p>{errors.lastName.message}</p>}
+            {errors.lastName && (
+              <p className={styles.errorText}>{errors.lastName.message}</p>
+            )}
           </div>
-          <div>
+          <div className={styles.inputGroup}>
             <input
+              className={styles.input}
               type="email"
               placeholder="Email"
               {...register("email", {
@@ -44,20 +55,22 @@ function SignUpForm() {
                 },
               })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className={styles.errorText}>{errors.email.message}</p>
+            )}
           </div>
           <div>
-            <label htmlFor="role">What are you?</label>
             <select
-              id="role"
+              className={styles.select}
               {...register("role", { required: true })}
             >
               <option value="patient">Patient</option>
               <option value="admin">Admin</option>
             </select>
           </div>
-          <div>
+          <div className={styles.inputGroup}>
             <input
+              className={styles.input}
               type="password"
               placeholder="Paswword"
               {...register("password", {
@@ -68,14 +81,22 @@ function SignUpForm() {
                 },
               })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className={styles.errorText}>{errors.password.message}</p>
+            )}
           </div>
-        </section>
-        <button type="submit">Register</button>
-      </form>
-      <button onClick={() => navigate("/login")}>
-        Already have a account?
-      </button>
+
+          <button className={styles.submitBtn} type="submit">
+            Sing Up
+          </button>
+          <button
+            className={styles.loginLink}
+            onClick={() => navigate("/login")}
+          >
+            Already have a account?
+          </button>
+        </form>
+      </main>
     </>
   );
 }
