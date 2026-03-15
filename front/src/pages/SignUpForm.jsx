@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../services/authService.js";
 import styles from "../styles/Forms.module.css";
+import { useState } from "react";
 function SignUpForm() {
+  const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -9,8 +12,16 @@ function SignUpForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const onSubmit = async (formData) => {
+    setServerError("");
+    try {
+      const data = await signup(formData);
+      if (data.status === "success") {
+        navigate("/login");
+      }
+    } catch (error) {
+      setServerError(error.message || "Registration failed");
+    }
   };
   return (
     <>
@@ -58,6 +69,7 @@ function SignUpForm() {
             {errors.email && (
               <p className={styles.errorText}>{errors.email.message}</p>
             )}
+            {serverError && <p className={styles.errorText}>{serverError}</p>}
           </div>
           <div>
             <select
