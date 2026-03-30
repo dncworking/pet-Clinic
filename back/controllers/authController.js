@@ -30,3 +30,37 @@ export const signup = async (req, res, next) => {
     next(error);
   }
 };
+
+export const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      res.status(400).json({
+        status: "fail",
+        message: "Please provide email and password",
+      });
+      return;
+    }
+    const user = await findUserByEmail(email);
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      res.status(401).json({
+        status: "fail",
+        message: "Incorrect email or password",
+      });
+      return;
+    }
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: {
+          id: user.id,
+          firstName: user.firstname,
+          email: user.email,
+        },
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
