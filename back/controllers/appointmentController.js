@@ -38,6 +38,13 @@ export const getAllAppointmentByID = async (req, res, next) => {
 export const postAppointment = async (req, res, next) => {
   try {
     const appointment = req.body;
+    const userId = req.body.user_id;
+    if (!userId) {
+      return res.status(401).json({
+        status: "fail",
+        message: "User must be logged in",
+      });
+    }
     const newAppointment = await postAppointmentM(appointment);
     res.status(201).json({
       status: "success",

@@ -13,24 +13,19 @@ export const getAllAppointmentByIDM = async (id) => {
   return data[0];
 };
 
-export const postAppointmentM = async (appointment) => {
-  const {
-    pet_name,
-    owner_name,
-    description,
-    appointment_date,
-    appointment_time,
-  } = appointment;
+export const postAppointmentM = async (appointment, userId) => {
+  const { pet_name, pet_owner, apt_date, apt_time, apt_notes } = appointment;
 
   const data = await sql`
   INSERT INTO pets_appointments
   (  pet_name,
-    owner_name,
-    description,
-    appointment_date,
-    appointment_time)
+    pet_owner,
+    apt_date,
+    apt_time,
+    apt_notes,
+    user_id)
     VALUES
-    (${pet_name},${owner_name},${description},${appointment_date},${appointment_time})
+    (${pet_name},${pet_owner},${apt_date},${apt_time},${apt_notes}, ${userId})
     RETURNING *`;
   return data[0];
 };
