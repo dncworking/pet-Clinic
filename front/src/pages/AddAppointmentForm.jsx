@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { postAppointment } from "../services/appointmentService.js";
 function AddAppointmentForm() {
-  const [error, SetError] = useState();
+  const [error, SetError] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -10,7 +11,18 @@ function AddAppointmentForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (params) => {};
+  const onSubmit = async (data) => {
+    try {
+      const result = await postAppointment(data);
+
+      if (result.status === "success") {
+        alert("Vizitas sėkmingai pridėtas! 🐾");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Klaida siunčiant:", error.message);
+    }
+  };
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -42,7 +54,7 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.petOwner && <p>{errors.petOwner.message}</p>}
+          {errors.ownerName && <p>{errors.ownerName.message}</p>}
         </div>
         <div>
           <label htmlFor="aptDate">Date</label>
@@ -54,14 +66,14 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.aptDate && <p>{errors.aptDate.message}</p>}
+          {errors.date && <p>{errors.date.message}</p>}
         </div>
         <div>
           <label htmlFor="aptTime">Time</label>
           <input
             id="aptTime"
             type="time"
-            {...register("time", {
+            {...register("aptTime", {
               required: "Time is required",
               onChange: () => SetError(""),
             })}
@@ -73,7 +85,7 @@ function AddAppointmentForm() {
           <textarea
             id="notes"
             placeholder="Appointment Notes"
-            {...register("note", {
+            {...register("notes", {
               required: "Note is required",
               minLength: {
                 value: 10,
@@ -84,6 +96,8 @@ function AddAppointmentForm() {
           ></textarea>
           {errors.notes && <p>{errors.notes.message}</p>}
         </div>
+        {error && <p>{error}</p>}
+        <button type="submit">Add</button>
       </form>
     </>
   );
