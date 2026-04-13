@@ -21,7 +21,7 @@ function LoginForm() {
       if (result.status === "success") {
         localStorage.setItem("user", JSON.stringify(result.data.user));
 
-        navigate("/");
+        navigate("/appointmenList");
 
         window.location.reload();
       }

@@ -21,3 +21,14 @@ export const postAppointment = async (appointmentData) => {
     throw new Error(errorMessage);
   }
 };
+
+export const getAppointments = async () => {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await api.get(`/appointments/${user.id}`);
+    return response.data.data || response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.message || "Something is wrong";
+    throw new Error(errorMessage);
+  }
+};

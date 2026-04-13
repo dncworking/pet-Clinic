@@ -17,7 +17,7 @@ function AddAppointmentForm() {
 
       if (result.status === "success") {
         alert("Vizitas sėkmingai pridėtas! 🐾");
-        navigate("/");
+        navigate("/appointmenList");
       }
     } catch (error) {
       console.error("Klaida siunčiant:", error.message);
@@ -27,25 +27,25 @@ function AddAppointmentForm() {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="petName">Pet Name</label>
+          <label htmlFor="pet_name">Pet Name</label>
           <input
-            id="petName"
+            id="pet_name"
             type="text"
             placeholder="Pet's Name"
-            {...register("petName", {
+            {...register("pet_name", {
               required: "Pet name is required",
               onChange: () => SetError(""),
             })}
           />
-          {errors.petName && <p>{errors.petName.message}</p>}
+          {errors.pet_name && <p>{errors.pet_name.message}</p>}
         </div>
         <div>
-          <label htmlFor="petOwner">Pet owner</label>
+          <label htmlFor="pet_owner">Pet owner</label>
           <input
-            id="petOwner"
+            id="pet_owner"
             type="text"
             placeholder="Owner's Name"
-            {...register("ownerName", {
+            {...register("pet_owner", {
               required: "Owner name is required",
               minLength: {
                 value: 3,
@@ -54,38 +54,38 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.ownerName && <p>{errors.ownerName.message}</p>}
+          {errors.pet_owner && <p>{errors.pet_owner.message}</p>}
         </div>
         <div>
-          <label htmlFor="aptDate">Date</label>
+          <label htmlFor="apt_date">Date</label>
           <input
-            id="aptDare"
+            id="apt_date"
             type="date"
-            {...register("date", {
+            {...register("apt_date", {
               required: "Date is required",
               onChange: () => SetError(""),
             })}
           />
-          {errors.date && <p>{errors.date.message}</p>}
+          {errors.apt_date && <p>{errors.apt_date.message}</p>}
         </div>
         <div>
-          <label htmlFor="aptTime">Time</label>
+          <label htmlFor="apt_time">Time</label>
           <input
-            id="aptTime"
+            id="apt_time"
             type="time"
-            {...register("aptTime", {
+            {...register("apt_time", {
               required: "Time is required",
               onChange: () => SetError(""),
             })}
           />
-          {errors.aptTime && <p>{errors.aptTime.message}</p>}
+          {errors.apt_time && <p>{errors.apt_time.message}</p>}
         </div>
         <div>
-          <label htmlFor="notes">Apt. Notes</label>
+          <label htmlFor="apt_notes">Apt. Notes</label>
           <textarea
-            id="notes"
+            id="apt_notes"
             placeholder="Appointment Notes"
-            {...register("notes", {
+            {...register("apt_notes", {
               required: "Note is required",
               minLength: {
                 value: 10,
@@ -94,7 +94,7 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           ></textarea>
-          {errors.notes && <p>{errors.notes.message}</p>}
+          {errors.apt_notes && <p>{errors.apt_notes.message}</p>}
         </div>
         {error && <p>{error}</p>}
         <button type="submit">Add</button>

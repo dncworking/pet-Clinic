@@ -45,7 +45,7 @@ export const postAppointment = async (req, res, next) => {
         message: "User must be logged in",
       });
     }
-    const newAppointment = await postAppointmentM(appointment);
+    const newAppointment = await postAppointmentM(appointment, userId);
     res.status(201).json({
       status: "success",
       data: newAppointment,

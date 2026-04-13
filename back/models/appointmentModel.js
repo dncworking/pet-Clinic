@@ -6,11 +6,12 @@ export const getAllAppointmentsM = async () => {
   return data;
 };
 
-export const getAllAppointmentByIDM = async (id) => {
+export const getAllAppointmentByIDM = async (userId) => {
   const data = await sql`
     SELECT * FROM pets_appointments
-    WHERE id = ${id}`;
-  return data[0];
+    WHERE user_id = ${userId}
+    ORDER BY created_at DESC`;
+  return data;
 };
 
 export const postAppointmentM = async (appointment, userId) => {
