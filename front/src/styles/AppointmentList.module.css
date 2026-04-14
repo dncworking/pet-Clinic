@@ -1,0 +1,100 @@
+/* Pagrindinis konteineris */
+.main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Pridėjimo mygtukas */
+.button {
+  display: block;
+  margin: 0 auto 2rem auto;
+  padding: 12px 24px;
+  background-color: #9e4ae2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #7435bd;
+  transform: translateY(-2px);
+}
+
+.appointments {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.appointments > div {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  transition: box-shadow 0.3s ease;
+}
+
+.appointments > div:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.petName {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #f0f4f8;
+  padding-bottom: 8px;
+}
+
+.ownerName,
+.date,
+.notes {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.date {
+  background-color: #f8f9fa;
+  padding: 8px;
+  border-radius: 6px;
+  color: #8c4ae2;
+  font-weight: 500;
+}
+
+.notes {
+  font-style: italic;
+  color: #777;
+}
+
+.noFound {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 40px;
+  color: #999;
+  font-size: 1.1rem;
+  background: #fdfdfd;
+  border: 2px dashed #eee;
+  border-radius: 12px;
+}
