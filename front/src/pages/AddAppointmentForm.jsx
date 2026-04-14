@@ -24,6 +24,13 @@ function AddAppointmentForm() {
       console.error("Klaida siunčiant:", error.message);
     }
   };
+  const today = new Date().toISOString().split("T")[0];
+  const timeSlots = [];
+  for (let hour = 0; hour < 24; hour++) {
+    const formattedHour = String(hour).padStart(2, "0");
+    timeSlots.push(`${formattedHour}:00`);
+    timeSlots.push(`${formattedHour}:30`);
+  }
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -69,6 +76,7 @@ function AddAppointmentForm() {
             className={styles.input}
             id="apt_date"
             type="date"
+            min={today}
             {...register("apt_date", {
               required: "Date is required",
               onChange: () => SetError(""),
@@ -80,15 +88,18 @@ function AddAppointmentForm() {
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="apt_time">Time</label>
-          <input
+          <select
             className={styles.input}
             id="apt_time"
-            type="time"
-            {...register("apt_time", {
-              required: "Time is required",
-              onChange: () => SetError(""),
-            })}
-          />
+            {...register("apt_time", { required: "Time is required" })}
+          >
+            <option value="">Select time</option>
+            {timeSlots.map((slot) => (
+              <option key={slot} value={slot}>
+                {slot}
+              </option>
+            ))}
+          </select>
           {errors.apt_time && (
             <p className={styles.errorText}>{errors.apt_time.message}</p>
           )}
@@ -113,7 +124,9 @@ function AddAppointmentForm() {
           )}
         </div>
         {error && <p>{error}</p>}
-        <button type="submit" className={styles.button}>Add</button>
+        <button type="submit" className={styles.button}>
+          Add
+        </button>
       </form>
     </>
   );
