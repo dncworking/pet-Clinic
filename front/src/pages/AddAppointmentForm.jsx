@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { postAppointment } from "../services/appointmentService.js";
+import styles from "../styles/AddAppointmentForm.module.css";
 function AddAppointmentForm() {
   const [error, SetError] = useState("");
   const navigate = useNavigate();
@@ -25,10 +26,11 @@ function AddAppointmentForm() {
   };
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <div className={styles.inputGroup}>
           <label htmlFor="pet_name">Pet Name</label>
           <input
+            className={styles.input}
             id="pet_name"
             type="text"
             placeholder="Pet's Name"
@@ -37,11 +39,14 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.pet_name && <p>{errors.pet_name.message}</p>}
+          {errors.pet_name && (
+            <p className={styles.errorText}>{errors.pet_name.message}</p>
+          )}
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor="pet_owner">Pet owner</label>
           <input
+            className={styles.input}
             id="pet_owner"
             type="text"
             placeholder="Owner's Name"
@@ -54,11 +59,14 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.pet_owner && <p>{errors.pet_owner.message}</p>}
+          {errors.pet_owner && (
+            <p className={styles.errorText}>{errors.pet_owner.message}</p>
+          )}
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor="apt_date">Date</label>
           <input
+            className={styles.input}
             id="apt_date"
             type="date"
             {...register("apt_date", {
@@ -66,11 +74,14 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.apt_date && <p>{errors.apt_date.message}</p>}
+          {errors.apt_date && (
+            <p className={styles.errorText}>{errors.apt_date.message}</p>
+          )}
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor="apt_time">Time</label>
           <input
+            className={styles.input}
             id="apt_time"
             type="time"
             {...register("apt_time", {
@@ -78,11 +89,14 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           />
-          {errors.apt_time && <p>{errors.apt_time.message}</p>}
+          {errors.apt_time && (
+            <p className={styles.errorText}>{errors.apt_time.message}</p>
+          )}
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor="apt_notes">Apt. Notes</label>
           <textarea
+            className={styles.input}
             id="apt_notes"
             placeholder="Appointment Notes"
             {...register("apt_notes", {
@@ -94,10 +108,12 @@ function AddAppointmentForm() {
               onChange: () => SetError(""),
             })}
           ></textarea>
-          {errors.apt_notes && <p>{errors.apt_notes.message}</p>}
+          {errors.apt_notes && (
+            <p className={styles.errorText}>{errors.apt_notes.message}</p>
+          )}
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Add</button>
+        <button type="submit" className={styles.button}>Add</button>
       </form>
     </>
   );
